@@ -35,6 +35,7 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+    transition: all 250ms;
   }
 
   svg {
@@ -46,8 +47,6 @@
 
   &:hover,
   .social-block--active & {
-    color: $c-purple;
-
     &::before {
       width: 112.5%;
       height: 112.5%;
@@ -140,11 +139,31 @@
   .social-block--active & {
     opacity: 1;
     pointer-events: auto;
+
+    li {
+      opacity: 1;
+      margin-top: 0;
+    }
   }
 
   li {
     flex: none;
     margin-bottom: 0.5rem;
+    margin-top: 1em;
+    opacity: 0;
+    transition: all 250ms ease-out;
+
+    &:nth-child(1) {
+      transition-duration: 100ms;
+    }
+
+    &:nth-child(2) {
+      transition-duration: 200ms;
+    }
+
+    &:nth-child(3) {
+      transition-duration: 300ms;
+    }
 
     @media (min-width: $stop-scaling) {
       margin-bottom: 5px;
