@@ -62,7 +62,6 @@
     }
 
     & + .social-block__list {
-      opacity: 1;
       pointer-events: auto;
     }
   }
@@ -127,7 +126,7 @@
   }
 
   &:hover {
-    opacity: 1;
+
     pointer-events: auto;
   }
 
@@ -151,18 +150,18 @@
     margin-bottom: 0.5rem;
     margin-top: 1em;
     opacity: 0;
-    transition: all 250ms ease-out;
+    transition: all 350ms ease-out;
 
     &:nth-child(1) {
-      transition-duration: 100ms;
+      transition-delay: 100ms;
     }
 
     &:nth-child(2) {
-      transition-duration: 200ms;
+      transition-delay: 200ms;
     }
 
     &:nth-child(3) {
-      transition-duration: 300ms;
+      transition-delay: 300ms;
     }
 
     @media (min-width: $stop-scaling) {
