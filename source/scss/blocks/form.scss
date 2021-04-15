@@ -35,7 +35,7 @@
   margin-left: auto;
   padding: 0 5.6rem;
   height: 6rem;
-  width: 6rem;
+  width: calc(100% - 21rem);
   text-transform: uppercase;
   font: inherit;
   font-size: 2.4rem;
@@ -46,8 +46,8 @@
   outline: none;
   transition: width 400ms ease-out;
 
-  .active & {
-    width: calc(100% - 21rem);
+  .screen:not(.active) & {
+    width: 6rem;
   }
 
   &:focus {
@@ -57,6 +57,7 @@
   @media (min-width: $stop-scaling) {
     margin-right: 30px;
     padding: 0 56px;
+    width: calc(100% - 210px);
     height: 60px;
     font-size: 24px;
     border-radius: 30px;
