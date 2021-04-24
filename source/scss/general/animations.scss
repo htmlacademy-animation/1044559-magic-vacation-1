@@ -1,0 +1,20 @@
+@keyframes pop {
+  from {
+    transform: translateY(150%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.anim-popping {
+  display: inline-flex;
+  overflow: hidden;
+  padding-top: 0.2em;
+  margin-top: -0.2em;
+}
+
+.anim-popping__letter {
+  animation: pop both;
+}
