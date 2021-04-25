@@ -44,6 +44,7 @@
   width: 400px;
   height: 400px;
   left: 50vw;
+  will-change: transform;
   transition: transform 1s 300ms cubic-bezier(0.15, 0.74, 0.23, 1);
   transform: translate(-200px, 100vh) scale(0) rotate(-10deg);
   z-index: 2;
@@ -57,6 +58,7 @@
   width: 250px;
   left: 50vw;
   top: 100vh;
+  will-change: transform;
   transform-origin: 20% 60%;
   transform: translateX(-190px);
   transition: top 1s 300ms cubic-bezier(0.15, 0.74, 0.23, 1);
@@ -72,6 +74,7 @@
   left: 50vw;
   top: 30vh;
   opacity: 0;
+  will-change: transform;
   transform-origin: 0 70%;
   animation: blue-leaf-right 1.6s 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
@@ -80,6 +83,7 @@
   left: 50vw;
   top: 40vh;
   opacity: 0;
+  will-change: transform;
   transform-origin: 100% 80%;
   transform: translateX(-300px);
   animation: blue-leaf-left 1.6s 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -89,6 +93,7 @@
   left: 50vw;
   top: 43vh;
   opacity: 0;
+  will-change: transform;
   transform-origin: 0 70%;
   animation: blue-leaf-right 1.6s 900ms cubic-bezier(0.45, 0.56, 0.45, 0.94) forwards;
   z-index: 1;
