@@ -21,12 +21,12 @@ function poppingText(domNode, duration = 800, delay = 100, timingFunction = `eas
       animDelayCounter++;
       letterSpan.classList.add(`anim-popping__letter`);
       letterSpan.textContent = letter;
-      letterSpan.style.animationDuration = duration / (idx + 1) + `ms`;
+      letterSpan.style.animationDuration = duration / (idx + 1) * 1.5 + `ms`;
       letterSpan.style.animationTimingFunction = timingFunction;
       letterSpan.style.animationDelay =
         (Math.abs((animDelayCounter % waveLength) - waveLength / 2)
         * (Math.trunc(Math.random() * 100 / (idx + 1)) + 75))
-        + (duration / (idx + 1) * idx)
+        + (duration / (idx + 1) * idx * 1.5)
         + delay
         + `ms`;
       span.appendChild(letterSpan);
