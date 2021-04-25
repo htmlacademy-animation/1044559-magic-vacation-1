@@ -1,6 +1,16 @@
 @keyframes pop {
   from {
-    transform: translateY(150%);
+    transform: translateY(125%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-125%);
   }
 
   to {
@@ -17,4 +27,8 @@
 
 .anim-popping__letter {
   animation: pop both;
+
+  &--reverse {
+    animation: drop both;
+  }
 }
