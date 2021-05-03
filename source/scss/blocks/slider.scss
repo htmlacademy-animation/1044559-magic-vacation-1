@@ -181,6 +181,30 @@
     z-index: -1;
   }
 
+  &--prev,
+  &--next {
+    opacity: 0;
+    transition:
+      transform 250ms linear 250ms,
+      opacity 250ms linear 250ms;
+  }
+
+  &--prev {
+    transform: translateX(-7rem) rotate(-105deg);
+  }
+
+  &--next {
+    transform: translateX(7rem) rotate(105deg);
+  }
+
+  .screen--story.active & {
+    &--prev,
+    &--next {
+      opacity: 1;
+      transform: translateX(0) rotate(0);
+    }
+  }
+
   svg {
     @include center;
     display: block;
@@ -225,7 +249,6 @@
   }
 
   &.swiper-button-disabled {
-    opacity: 0.5;
     pointer-events: none;
   }
 }
@@ -242,6 +265,12 @@
   font-weight: 400;
   font-size: 2.4rem;
   line-height: 4rem;
+  opacity: 0;
+  transition: opacity 150ms ease-out 350ms;
+
+  .screen--story.active & {
+    opacity: 1;
+  }
 
   @media (min-width: $stop-scaling) {
     bottom: 28px;
