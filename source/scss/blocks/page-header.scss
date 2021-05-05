@@ -291,14 +291,14 @@
 
     &:hover,
     &:focus {
-      color: $c-dark;
+      color: $c-purple;
       outline: none;
 
       &::after {
         width: 100%;
         left: 0;
         right: auto;
-        background-color: $c-dark;
+        background-color: $c-purple;
       }
     }
 
@@ -324,13 +324,13 @@
       }
     }
 
-    .page-header--dark & {
+    .page-header--light & {
       &:hover,
       &:focus {
-        color: $c-purple;
+        color: $c-dark;
 
         &::after {
-          background-color: $c-purple;
+          background-color: $c-dark;
         }
       }
     }
