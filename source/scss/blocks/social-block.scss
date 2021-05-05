@@ -15,7 +15,7 @@
   display: block;
   width: 4rem;
   height: 4rem;
-  color: $c-dark;
+  color: $c-purple;
   border-radius: 50%;
 
   @media (max-width: $tablet) and (orientation: portrait) {
@@ -58,12 +58,16 @@
     }
   }
 
+  &:hover {
+    color: $c-dark;
+  }
+
   &:focus {
-    color: $c-purple;
+    color: $c-dark;
     outline: none;
 
     &::before {
-      border-color: $c-purple;
+      border-color: $c-dark;
     }
 
     & + .social-block__list {
@@ -78,8 +82,87 @@
     &::before {
       width: 100%;
       height: 100%;
-      background-color: $c-purple;
-      border-color: $c-purple;
+      background-color: $c-dark;
+      border-color: $c-dark;
+    }
+  }
+
+
+  .page-header--water & {
+    color: $secondary;
+
+    &:hover {
+      color: $secondary-light;
+    }
+
+    &:focus {
+      color: $secondary-light;
+
+      &::before {
+        border-color: $secondary-light;
+      }
+    }
+
+    &:active,
+    &:active:focus {
+      color: $c-light;
+
+      &::before {
+        background-color: $secondary-light;
+        border-color: $secondary-light;
+      }
+    }
+  }
+
+  .page-header--ice & {
+    color: $tertiary;
+
+    &:hover {
+      color: $tertiary-contrast;
+    }
+
+    &:focus {
+      color: $tertiary-contrast;
+
+      &::before {
+        border-color: $tertiary-contrast;
+      }
+    }
+
+    &:active,
+    &:active:focus {
+      color: $c-light;
+
+      &::before {
+        background-color: $tertiary-contrast;
+        border-color: $tertiary-contrast;
+      }
+    }
+  }
+
+  .page-header--dark & {
+    color: $c-dark;
+
+    &:hover {
+      color: $c-purple;
+    }
+
+    &:focus {
+      color: $c-purple;
+
+      &::before {
+        border-color: $c-purple;
+      }
+    }
+
+    &:active,
+    &:active:focus {
+      color: $c-light;
+
+      &::before {
+        background-color: $c-purple;
+        border-color: $c-purple;
+      }
     }
   }
 }
@@ -208,21 +291,78 @@
   }
 
   &:hover {
-    color: $c-purple;
+    color: $c-dark;
   }
 
   &:focus {
-    color: $c-purple;
+    color: $c-dark;
     background-color: $c-light;
-    border-color: $c-purple;
+    border-color: $c-dark;
     outline: none;
   }
 
   &:active,
   &:active:focus {
-    color: $c-purple;
+    color: $c-dark;
     background-color: $c-light;
     border-color: $c-light;
+  }
+
+  .page-header--water & {
+    &:hover {
+      color: $secondary-light;
+    }
+
+    &:focus {
+      color: $secondary;
+      background-color: $secondary-light;
+      border-color: $secondary;
+    }
+
+    &:active,
+    &:active:focus {
+      color: $secondary;
+      background-color: $secondary-light;
+      border-color: $secondary-light;
+    }
+  }
+
+  .page-header--ice & {
+    &:hover {
+      color: $tertiary-contrast;
+    }
+
+    &:focus {
+      color: $tertiary;
+      background-color: $tertiary-contrast;
+      border-color: $tertiary;
+    }
+
+    &:active,
+    &:active:focus {
+      color: $c-light;
+      background-color: $tertiary-contrast;
+      border-color: $tertiary-contrast;
+    }
+  }
+
+  .page-header--dark & {
+    &:hover {
+      color: $c-purple;
+    }
+
+    &:focus {
+      color: $c-purple;
+      background-color: $c-light;
+      border-color: $c-purple;
+    }
+
+    &:active,
+    &:active:focus {
+      color: $c-purple;
+      background-color: $c-light;
+      border-color: $c-light;
+    }
   }
 
   svg {

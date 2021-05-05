@@ -291,14 +291,47 @@
 
     &:hover,
     &:focus {
-      color: $c-purple;
+      color: $c-dark;
       outline: none;
 
       &::after {
         width: 100%;
         left: 0;
         right: auto;
-        background-color: $c-purple;
+        background-color: $c-dark;
+      }
+    }
+
+    .page-header--water & {
+      &:hover,
+      &:focus {
+        color: $secondary-light;
+
+        &::after {
+          background-color: $secondary-light;
+        }
+      }
+    }
+
+    .page-header--ice & {
+      &:hover,
+      &:focus {
+        color: $tertiary-contrast;
+
+        &::after {
+          background-color: $tertiary-contrast;
+        }
+      }
+    }
+
+    .page-header--dark & {
+      &:hover,
+      &:focus {
+        color: $c-purple;
+
+        &::after {
+          background-color: $c-purple;
+        }
       }
     }
   }
