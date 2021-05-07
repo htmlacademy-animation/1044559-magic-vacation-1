@@ -11,6 +11,7 @@ export default class FullPageScroll {
     this.previousScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
     this.onUrlHashChengedHandler = this.onUrlHashChanged.bind(this);
+    this.transitionsWithTimeout = [{prev: `story`, next: `prizes`}, {prev: `prizes`, next: `rules`}];
   }
 
   init() {
@@ -41,13 +42,17 @@ export default class FullPageScroll {
     this.emitChangeDisplayEvent();
   }
 
+  changeScreenTransitionDuration(prevId, activeId) {
+    return this.transitionsWithTimeout.some((transition) => {
+      return prevId === transition.prev && activeId === transition.next;
+    }) ? 350 : 0;
+  }
+
   changeVisibilityDisplay() {
-    const timeout =
-      this.screenElements[this.activeScreen].id === `prizes`
-      && this.screenElements[this.previousScreen].id === `story` ? 350 : 0;
+    const timeout = this.changeScreenTransitionDuration(this.screenElements[this.previousScreen].id, this.screenElements[this.activeScreen].id);
 
     this.screenElements.forEach((screen) => {
-      if (timeout && screen.id === `story`) {
+      if (timeout && (screen.id === `story` || screen.id === `prizes`)) {
         setTimeout(() => {
           screen.classList.add(`screen--hidden`);
         }, timeout);
@@ -78,8 +83,8 @@ export default class FullPageScroll {
       detail: {
         'screenId': this.activeScreen,
         'screenName': this.screenElements[this.activeScreen].id,
-        'screenElement': this.screenElements[this.activeScreen]
-      }
+        'screenElement': this.screenElements[this.activeScreen],
+      },
     });
 
     document.body.dispatchEvent(event);

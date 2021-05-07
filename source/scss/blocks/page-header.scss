@@ -301,6 +301,39 @@
         background-color: $c-purple;
       }
     }
+
+    .page-header--water & {
+      &:hover,
+      &:focus {
+        color: $secondary-light;
+
+        &::after {
+          background-color: $secondary-light;
+        }
+      }
+    }
+
+    .page-header--ice & {
+      &:hover,
+      &:focus {
+        color: $tertiary-contrast;
+
+        &::after {
+          background-color: $tertiary-contrast;
+        }
+      }
+    }
+
+    .page-header--light & {
+      &:hover,
+      &:focus {
+        color: $c-dark;
+
+        &::after {
+          background-color: $c-dark;
+        }
+      }
+    }
   }
 }
 
