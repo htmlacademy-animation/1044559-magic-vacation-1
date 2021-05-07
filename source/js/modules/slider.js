@@ -3,17 +3,18 @@ import Swiper from "swiper";
 export default () => {
   let storySlider;
   let sliderContainer = document.getElementById(`story`);
+  const pageHeader = document.querySelector(`.page-header`);
+  const headerClasses = [`page-header--water`, `page-header--ice`, `page-header--light`];
   sliderContainer.style.backgroundImage = `url("img/slide1.jpg"), linear-gradient(180deg, rgba(83, 65, 118, 0) 0%, #523E75 16.85%)`;
   document.body.addEventListener(`screenChanged`, (e) => {
-    if (e.detail.screenName === `story`) {
-      changeHeaderClass();
-    }
+    changeHeaderClass(e.detail.screenName);
   });
 
-  const changeHeaderClass = () => {
-    const pageHeader = document.querySelector(`.page-header`);
-    const headerClasses = [`page-header--water`, `page-header--ice`, `page-header--light`];
+  const changeHeaderClass = (screen) => {
     pageHeader.classList.remove(...headerClasses);
+    if (screen && screen !== `story`) {
+      return;
+    }
     if (storySlider.activeIndex === 0 || storySlider.activeIndex === 1) {
       pageHeader.classList.add(headerClasses[2]);
     } else if (storySlider.activeIndex === 2 || storySlider.activeIndex === 3) {
