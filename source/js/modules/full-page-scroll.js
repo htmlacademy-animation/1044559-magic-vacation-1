@@ -36,6 +36,13 @@ export default class FullPageScroll {
     this.changePageDisplay();
   }
 
+  activateSvgs() {
+    if (this.activeScreen === 2 && this.previousScreen !== 2) {
+      const imgEl = document.querySelector(`.prizes__prize1`);
+      imgEl.src = `img/prize1.svg?${new Date().getTime()}`;
+    }
+  }
+
   changePageDisplay() {
     this.changeVisibilityDisplay();
     this.changeActiveMenuItem();
@@ -49,6 +56,7 @@ export default class FullPageScroll {
   }
 
   changeVisibilityDisplay() {
+    this.activateSvgs();
     const timeout = this.changeScreenTransitionDuration(this.screenElements[this.previousScreen].id, this.screenElements[this.activeScreen].id);
 
     this.screenElements.forEach((screen) => {

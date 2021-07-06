@@ -104,6 +104,16 @@
   }
 }
 
+@keyframes slideFirstPrize {
+  0% {
+    transform: translateX(15em);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .prizes__item {
   margin-left: 7.5rem;
 
@@ -127,6 +137,11 @@
   }
 
   &--journeys {
+    @media (min-width: $tablet) and (orientation: landscape) {
+      transform: translateX(15em);
+      animation: slideFirstPrize 500ms 3.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
     .prizes__icon {
       position: relative;
       left: -5.9rem;
@@ -158,6 +173,7 @@
 
   &--cases {
     margin-left: 7rem;
+    opacity: 0;
 
     @media (min-width: $stop-scaling) {
       margin-left: 70px;
@@ -191,6 +207,8 @@
   }
 
   &--codes {
+    opacity: 0;
+
     @media (max-width: $tablet) and (orientation: portrait) {
       padding-left: 0.8rem;
     }
