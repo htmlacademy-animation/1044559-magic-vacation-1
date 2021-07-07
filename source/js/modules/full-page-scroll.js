@@ -38,8 +38,22 @@ export default class FullPageScroll {
 
   activateSvgs() {
     if (this.activeScreen === 2 && this.previousScreen !== 2) {
-      const imgEl = document.querySelector(`.prizes__prize1`);
-      imgEl.src = `img/prize1.svg?${new Date().getTime()}`;
+      const prizesSection = document.querySelector(`.prizes`);
+      const prize1item = prizesSection.querySelector(`.prizes__item--journeys`);
+      const prize2item = prizesSection.querySelector(`.prizes__item--cases`);
+      const prize3item = prizesSection.querySelector(`.prizes__item--codes`);
+      const imgPrize1 = prizesSection.querySelector(`.prizes__prize1`);
+      const imgPrize2 = prizesSection.querySelector(`.prizes__prize2`);
+      // const imgPrize3 = prizesSection.querySelector(`.prizes__prize3`);
+      [prize1item, prize2item, prize3item].forEach((item) => item.classList.remove(`prizes__item--active`));
+
+      imgPrize1.src = `img/prize1.svg?${new Date().getTime()}`;
+      setTimeout(() =>prize1item.classList.add(`prizes__item--active`), 0);
+      imgPrize2.src = ``;
+      setTimeout(function () {
+        imgPrize2.src = `img/prize2.svg?${new Date().getTime()}`;
+        prize2item.classList.add(`prizes__item--active`);
+      }, 3200);
     }
   }
 
