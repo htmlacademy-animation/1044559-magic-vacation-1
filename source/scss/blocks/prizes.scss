@@ -173,19 +173,22 @@
 
   &--cases {
     margin-left: 7rem;
-    opacity: 0;
 
     @media (min-width: $stop-scaling) {
       margin-left: 70px;
     }
 
     @media (max-width: $tablet) and (orientation: portrait) {
-      margin-left: 0;
-      padding-left: 1.5rem;
+      margin-left: 5rem;
     }
 
     .prizes__icon {
-      width: 18.8rem;
+      @media (min-width: $tablet) and (orientation: landscape) {
+        position: relative;
+        left: -5.9rem;
+        bottom: -1.4rem;
+        width: 26.8rem;
+      }
 
       @media (min-width: $stop-scaling) {
         width: 188px;
@@ -253,6 +256,12 @@
   margin: 5.6rem 0 0 0;
   font-size: 1.8rem;
   line-height: 1.1;
+  opacity: 0;
+  transition: opacity 1300ms 500ms ease-out;
+
+  .prizes__item--active & {
+    opacity: 1;
+  }
 
   @media (min-width: $stop-scaling) {
     margin-top: 56px;
