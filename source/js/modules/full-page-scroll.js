@@ -62,12 +62,13 @@ export default class FullPageScroll {
       const imgPrize1 = prizesSection.querySelector(`.prizes__prize1`);
       const imgPrize2 = prizesSection.querySelector(`.prizes__prize2`);
       const imgPrize3 = prizesSection.querySelector(`.prizes__prize3`);
+      const timeouts = this.previousScreen === 1 ? [333, 3666, 5888] : [0, 3333, 5555];
       [prize1item, prize2item, prize3item].forEach((item) => item.classList.remove(`prizes__item--active`));
       [imgPrize1, imgPrize2, imgPrize3].forEach(removeSrc);
 
-      activateSvg(prize1item, imgPrize1, `img/prize1.svg`, 0, this.timeOuts);
-      activateSvg(prize2item, imgPrize2, `img/prize2.svg`, 3333, this.timeOuts);
-      activateSvg(prize3item, imgPrize3, `img/prize3.svg`, 5555, this.timeOuts);
+      activateSvg(prize1item, imgPrize1, `img/prize1.svg`, timeouts[0], this.timeOuts);
+      activateSvg(prize2item, imgPrize2, `img/prize2.svg`, timeouts[1], this.timeOuts);
+      activateSvg(prize3item, imgPrize3, `img/prize3.svg`, timeouts[2], this.timeOuts);
     }
   }
 
