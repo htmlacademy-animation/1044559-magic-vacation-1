@@ -1,5 +1,17 @@
 import debounce from 'lodash/debounce';
 
+function removeSrc(img) {
+  img.src = ``;
+}
+
+function activateSvg(prizeItem, img, path, timeout, timeouts) {
+  const prizeTimeout = setTimeout(function () {
+    img.src = `${path}?${new Date().getTime()}`;
+    prizeItem.classList.add(`prizes__item--active`);
+  }, timeout);
+  timeouts.push(prizeTimeout);
+}
+
 export default class FullPageScroll {
   constructor() {
     this.DEBOUNCE_TIMEOUT = 200;
@@ -49,17 +61,13 @@ export default class FullPageScroll {
       const prize3item = prizesSection.querySelector(`.prizes__item--codes`);
       const imgPrize1 = prizesSection.querySelector(`.prizes__prize1`);
       const imgPrize2 = prizesSection.querySelector(`.prizes__prize2`);
-      // const imgPrize3 = prizesSection.querySelector(`.prizes__prize3`);
+      const imgPrize3 = prizesSection.querySelector(`.prizes__prize3`);
       [prize1item, prize2item, prize3item].forEach((item) => item.classList.remove(`prizes__item--active`));
+      [imgPrize1, imgPrize2, imgPrize3].forEach(removeSrc);
 
-      imgPrize1.src = `img/prize1.svg?${new Date().getTime()}`;
-      setTimeout(() =>prize1item.classList.add(`prizes__item--active`), 0);
-      imgPrize2.src = ``;
-      const prize2timeout = setTimeout(function () {
-        imgPrize2.src = `img/prize2.svg?${new Date().getTime()}`;
-        prize2item.classList.add(`prizes__item--active`);
-      }, 3250);
-      this.timeOuts.push(prize2timeout);
+      activateSvg(prize1item, imgPrize1, `img/prize1.svg`, 0, this.timeOuts);
+      activateSvg(prize2item, imgPrize2, `img/prize2.svg`, 3333, this.timeOuts);
+      activateSvg(prize3item, imgPrize3, `img/prize3.svg`, 5555, this.timeOuts);
     }
   }
 
