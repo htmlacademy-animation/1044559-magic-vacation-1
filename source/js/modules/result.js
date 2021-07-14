@@ -12,7 +12,10 @@ export default () => {
         let targetEl = [].slice.call(results).filter(function (el) {
           return el.getAttribute(`id`) === target;
         });
-        setTimeout(() => targetEl[0].classList.add(`screen--show`), 100);
+        setTimeout(() => {
+          targetEl[0].classList.add(`screen--show`);
+          targetEl[0].querySelector(`svg animate`).beginElement();
+        }, 100);
         targetEl[0].classList.remove(`screen--hidden`);
       });
     }
