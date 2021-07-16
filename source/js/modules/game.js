@@ -1,5 +1,5 @@
 const COUNTER_MAX = 5 * 60 * 1000; // 5 minutes
-const FPS_INTERVAL = 500;
+const FPS_INTERVAL = 250;
 
 export default () => {
   const counter = document.querySelector(`.game__counter`);
@@ -7,7 +7,7 @@ export default () => {
   let requestId;
 
   function startCounter() {
-    const start = Date.now();
+    const start = Date.now() + COUNTER_MAX;
     let now;
     let then = Date.now();
     let elapsed;
@@ -18,13 +18,13 @@ export default () => {
 
     function tick() {
       requestId = requestAnimationFrame(tick);
-      const timeRemaining = Date.now() - start;
+      const timeRemaining = start - Date.now();
       now = Date.now();
       elapsed = now - then;
-      if (elapsed > FPS_INTERVAL && timeRemaining < COUNTER_MAX + FPS_INTERVAL) {
+      if (elapsed > FPS_INTERVAL && timeRemaining > 0) {
         then = now - (elapsed % FPS_INTERVAL);
         changeNumbers(timeRemaining);
-      } else if (timeRemaining > COUNTER_MAX) {
+      } else if (timeRemaining <= 0) {
         stopCounter();
       }
     }
@@ -36,9 +36,9 @@ export default () => {
     window.cancelAnimationFrame(requestId);
   }
 
-  function changeNumbers(timePassed) {
-    minutes.textContent = String(Math.floor(timePassed / 1000 / 60)).padStart(2, `0`);
-    seconds.textContent = String(Math.floor((timePassed / 1000) % 60)).padStart(2, `0`);
+  function changeNumbers(timeRemaining) {
+    minutes.textContent = String(Math.floor(timeRemaining / 1000 / 60)).padStart(2, `0`);
+    seconds.textContent = String(Math.floor((timeRemaining / 1000) % 60)).padStart(2, `0`);
   }
 
   window.addEventListener(`popstate`, () => {
@@ -46,7 +46,7 @@ export default () => {
       startCounter();
     } else {
       stopCounter();
-      minutes.textContent = `00`;
+      minutes.textContent = `05`;
       seconds.textContent = `00`;
     }
   });
