@@ -214,6 +214,14 @@
       padding-left: 0.8rem;
     }
 
+    .prizes__desc b {
+      width: 18rem;
+
+      @media (min-width: $stop-scaling) {
+        width: 180px;
+      }
+    }
+
     .prizes__icon {
       width: 26rem;
 
