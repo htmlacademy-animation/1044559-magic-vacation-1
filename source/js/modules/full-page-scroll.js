@@ -1,45 +1,5 @@
 import debounce from 'lodash/debounce';
-
-const FPS_INTERVAL = 1000 / 12;
-
-function removeSrc(img) {
-  img.src = ``;
-}
-
-function activateSvg(prizeItem, img, path, timeout, timeouts) {
-  const prizeTimeout = setTimeout(function () {
-    img.src = `${path}?${new Date().getTime()}`;
-    prizeItem.classList.add(`prizes__item--active`);
-  }, timeout);
-  timeouts.push(prizeTimeout);
-}
-
-function activateSvgTitleAnimation(selector, duration, from, to) {
-  const numbers = document.querySelector(selector);
-  const finish = Date.now() + duration;
-  let requestId;
-  let then = Date.now();
-  let now;
-  let elapsed;
-
-  numbers.textContent = from;
-
-  function tick() {
-    requestId = requestAnimationFrame(tick);
-    const timeRemaining = finish - Date.now();
-    now = Date.now();
-    elapsed = now - then;
-    if (elapsed > FPS_INTERVAL && timeRemaining > 0) {
-      then = now - (elapsed % FPS_INTERVAL);
-      numbers.textContent = String((Math.random() * 1000).toFixed(0));
-    } else if (timeRemaining <= 0) {
-      numbers.textContent = to;
-      window.cancelAnimationFrame(requestId);
-    }
-  }
-
-  requestId = requestAnimationFrame(tick);
-}
+import {activatePrizesTitleAnimation, activateCasesTitleAnimation, activateSvg, removeSrc} from './prizes-svg-animation';
 
 export default class FullPageScroll {
   constructor() {
@@ -98,7 +58,8 @@ export default class FullPageScroll {
       activateSvg(prize1item, imgPrize1, `img/prize1.svg`, timeouts[0], this.timeOuts);
       activateSvg(prize2item, imgPrize2, `img/prize2.svg`, timeouts[1], this.timeOuts);
       activateSvg(prize3item, imgPrize3, `img/prize3.svg`, timeouts[2], this.timeOuts);
-      this.timeOuts.push(setTimeout(() => activateSvgTitleAnimation(`.prizes__item--codes .prizes__desc b`, 550, `11`, `900`), timeouts[2] + 650));
+      this.timeOuts.push(activateCasesTitleAnimation(`.prizes__item--cases .prizes__desc b`, `1`, `7`, timeouts[1] + 600));
+      this.timeOuts.push(activatePrizesTitleAnimation(`.prizes__item--codes .prizes__desc b`, `11`, `900`, timeouts[2] + 650));
     }
   }
 
