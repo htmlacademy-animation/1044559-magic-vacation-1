@@ -10342,48 +10342,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FullPageScroll; });
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
 /* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./prizes-svg-animation */ "./source/js/modules/prizes-svg-animation.js");
 
 
-const FPS_INTERVAL = 1000 / 12;
-
-function removeSrc(img) {
-  img.src = ``;
-}
-
-function activateSvg(prizeItem, img, path, timeout, timeouts) {
-  const prizeTimeout = setTimeout(function () {
-    img.src = `${path}?${new Date().getTime()}`;
-    prizeItem.classList.add(`prizes__item--active`);
-  }, timeout);
-  timeouts.push(prizeTimeout);
-}
-
-function activateSvgTitleAnimation(selector, duration, from, to) {
-  const numbers = document.querySelector(selector);
-  const finish = Date.now() + duration;
-  let requestId;
-  let then = Date.now();
-  let now;
-  let elapsed;
-
-  numbers.textContent = from;
-
-  function tick() {
-    requestId = requestAnimationFrame(tick);
-    const timeRemaining = finish - Date.now();
-    now = Date.now();
-    elapsed = now - then;
-    if (elapsed > FPS_INTERVAL && timeRemaining > 0) {
-      then = now - (elapsed % FPS_INTERVAL);
-      numbers.textContent = String((Math.random() * 1000).toFixed(0));
-    } else if (timeRemaining <= 0) {
-      numbers.textContent = to;
-      window.cancelAnimationFrame(requestId);
-    }
-  }
-
-  requestId = requestAnimationFrame(tick);
-}
 
 class FullPageScroll {
   constructor() {
@@ -10437,12 +10398,13 @@ class FullPageScroll {
       const imgPrize3 = prizesSection.querySelector(`.prizes__prize3`);
       const timeouts = this.previousScreen === 1 ? [333, 3666, 5888] : [0, 3333, 5555];
       [prize1item, prize2item, prize3item].forEach((item) => item.classList.remove(`prizes__item--active`));
-      [imgPrize1, imgPrize2, imgPrize3].forEach(removeSrc);
+      [imgPrize1, imgPrize2, imgPrize3].forEach(_prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__["removeSrc"]);
 
-      activateSvg(prize1item, imgPrize1, `img/prize1.svg`, timeouts[0], this.timeOuts);
-      activateSvg(prize2item, imgPrize2, `img/prize2.svg`, timeouts[1], this.timeOuts);
-      activateSvg(prize3item, imgPrize3, `img/prize3.svg`, timeouts[2], this.timeOuts);
-      this.timeOuts.push(setTimeout(() => activateSvgTitleAnimation(`.prizes__item--codes .prizes__desc b`, 550, `11`, `900`), timeouts[2] + 650));
+      Object(_prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__["activateSvg"])(prize1item, imgPrize1, `img/prize1.svg`, timeouts[0], this.timeOuts);
+      Object(_prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__["activateSvg"])(prize2item, imgPrize2, `img/prize2.svg`, timeouts[1], this.timeOuts);
+      Object(_prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__["activateSvg"])(prize3item, imgPrize3, `img/prize3.svg`, timeouts[2], this.timeOuts);
+      this.timeOuts.push(Object(_prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__["activateCasesTitleAnimation"])(`.prizes__item--cases .prizes__desc b`, `1`, `7`, timeouts[1] + 600));
+      this.timeOuts.push(Object(_prizes_svg_animation__WEBPACK_IMPORTED_MODULE_1__["activatePrizesTitleAnimation"])(`.prizes__item--codes .prizes__desc b`, `11`, `900`, timeouts[2] + 650));
     }
   }
 
@@ -10739,6 +10701,84 @@ function poppingText(domNode, duration = 800, delay = 100, timingFunction = `eas
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (poppingText);
+
+
+/***/ }),
+
+/***/ "./source/js/modules/prizes-svg-animation.js":
+/*!***************************************************!*\
+  !*** ./source/js/modules/prizes-svg-animation.js ***!
+  \***************************************************/
+/*! exports provided: removeSrc, activateSvg, activatePrizesTitleAnimation, activateCasesTitleAnimation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeSrc", function() { return removeSrc; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activateSvg", function() { return activateSvg; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activatePrizesTitleAnimation", function() { return activatePrizesTitleAnimation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "activateCasesTitleAnimation", function() { return activateCasesTitleAnimation; });
+const FPS_INTERVAL = 1000 / 12;
+
+function removeSrc(img) {
+  img.src = ``;
+}
+
+function activateSvg(prizeItem, img, path, timeout, timeouts) {
+  const prizeTimeout = setTimeout(function () {
+    img.src = `${path}?${new Date().getTime()}`;
+    prizeItem.classList.add(`prizes__item--active`);
+  }, timeout);
+  timeouts.push(prizeTimeout);
+}
+
+function activateSvgTitleAnimation(element, from, to, transformFunction) {
+  const finish = Date.now() + FPS_INTERVAL * 7;
+  let requestId;
+  let then = Date.now();
+  let now;
+  let elapsed;
+
+  function tick() {
+    requestId = requestAnimationFrame(tick);
+    const timeRemaining = finish - Date.now();
+    now = Date.now();
+    elapsed = now - then;
+    if (elapsed > FPS_INTERVAL && timeRemaining > 0) {
+      then = now - (elapsed % FPS_INTERVAL);
+      element.textContent = transformFunction(element.textContent);
+    } else if (timeRemaining <= 0) {
+      element.textContent = to;
+      window.cancelAnimationFrame(requestId);
+    }
+  }
+
+  requestId = requestAnimationFrame(tick);
+}
+
+function activateSvgTitleAnimationWithTimeout(selector, from, to, timeout, transformFunction) {
+  const element = document.querySelector(selector);
+  element.textContent = from;
+  return setTimeout(() => activateSvgTitleAnimation(element, from, to, transformFunction), timeout);
+}
+
+function transformPrizesTitle(title) {
+  return String(((Math.random() * 200) + Number(title)).toFixed(0));
+}
+
+function activatePrizesTitleAnimation(selector, from, to, timeout) {
+  return activateSvgTitleAnimationWithTimeout(selector, from, to, timeout, transformPrizesTitle);
+}
+
+function transformCasesTitle(title) {
+  return Number(title) + 1;
+}
+
+function activateCasesTitleAnimation(selector, from, to, timeout) {
+  return activateSvgTitleAnimationWithTimeout(selector, from, to, timeout, transformCasesTitle);
+}
+
+
 
 
 /***/ }),

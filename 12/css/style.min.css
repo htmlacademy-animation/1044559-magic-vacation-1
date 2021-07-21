@@ -2612,6 +2612,14 @@ body.loaded .page-header__nav {
     margin-left: 5rem;
   }
 }
+.prizes__item--cases .prizes__desc b {
+  width: 6rem;
+}
+@media (min-width: 2000px) {
+  .prizes__item--cases .prizes__desc b {
+    width: 60px;
+  }
+}
 @media (min-width: 1024px) and (orientation: landscape) {
   .prizes__item--cases .prizes__icon {
     position: relative;
