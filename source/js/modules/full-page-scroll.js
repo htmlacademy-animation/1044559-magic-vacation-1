@@ -1,16 +1,5 @@
 import debounce from 'lodash/debounce';
-
-function removeSrc(img) {
-  img.src = ``;
-}
-
-function activateSvg(prizeItem, img, path, timeout, timeouts) {
-  const prizeTimeout = setTimeout(function () {
-    img.src = `${path}?${new Date().getTime()}`;
-    prizeItem.classList.add(`prizes__item--active`);
-  }, timeout);
-  timeouts.push(prizeTimeout);
-}
+import {activatePrizesTitleAnimation, activateCasesTitleAnimation, activateSvg, removeSrc} from './prizes-svg-animation';
 
 export default class FullPageScroll {
   constructor() {
@@ -69,6 +58,8 @@ export default class FullPageScroll {
       activateSvg(prize1item, imgPrize1, `img/prize1.svg`, timeouts[0], this.timeOuts);
       activateSvg(prize2item, imgPrize2, `img/prize2.svg`, timeouts[1], this.timeOuts);
       activateSvg(prize3item, imgPrize3, `img/prize3.svg`, timeouts[2], this.timeOuts);
+      this.timeOuts.push(activateCasesTitleAnimation(`.prizes__item--cases .prizes__desc b`, `1`, `7`, timeouts[1] + 600));
+      this.timeOuts.push(activatePrizesTitleAnimation(`.prizes__item--codes .prizes__desc b`, `11`, `900`, timeouts[2] + 650));
     }
   }
 
